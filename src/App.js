@@ -10,7 +10,8 @@ import './App.css';
 class App extends Component {
   state = {
     users: [],
-    loading: false
+    loading: false,
+    searchedUsers: false
   }
 
 
@@ -37,13 +38,14 @@ class App extends Component {
 
     this.setState({
       users: res.data.items,
-      loading: false
+      loading: false,
+      searchedUsers: true
     })
   }
 
   //clear users from state
   clearInput = () => {
-    this.setState({ users: [], loading: false })
+    this.setState({ users: [], loading: false, searchedUsers: false })
   }
 
   render() {
@@ -51,7 +53,7 @@ class App extends Component {
       <div className='app'>
         <Navbar title='Github Finder' icon='fab fa-github' />
         <div className='container'>
-          <Search searchUsers={this.searchUsers} clearInput={this.clearInput} />
+          <Search searchUsers={this.searchUsers} clearInput={this.clearInput} searchedUsers={this.state.searchedUsers} />
           <Users loading={this.state.loading} users={this.state.users} />
         </div>
 

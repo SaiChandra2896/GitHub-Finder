@@ -8,7 +8,8 @@ class Search extends Component {
 
     static propTypes = {
         searchUsers: PropTypes.func.isRequired,
-        clearInput: PropTypes.func.isRequired
+        clearInput: PropTypes.func.isRequired,
+        searchedUsers: PropTypes.bool.isRequired
     }
 
     onChange = (e) => this.setState({ [e.target.name]: e.target.value })
@@ -19,8 +20,8 @@ class Search extends Component {
         this.setState({ text: '' })
     }
 
-
     render() {
+        const { searchedUsers } = this.props;
         return (
             <div>
                 <form className='form' onSubmit={this.onSubmit}>
@@ -28,7 +29,7 @@ class Search extends Component {
                         value={this.state.text} onChange={this.onChange} />
                     <input type='submit' value='search' className='btn btn-dark btn-block' />
                 </form>
-                <button className='btn btn-light btn-block' onClick={this.props.clearInput}>Clear</button>
+                {searchedUsers ? <button className='btn btn-light btn-block' onClick={this.props.clearInput}>Clear</button> : null}
             </div>
         )
     }
