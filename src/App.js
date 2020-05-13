@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import axios from 'axios';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 
 import Navbar from './components/layout/Navbar';
 import Users from './components/users/Users';
 import Search from './components/users/Search';
 import Alert from './components/layout/Alert';
+import About from './components/pages/About';
 import './App.css';
 
 class App extends Component {
@@ -44,16 +46,27 @@ class App extends Component {
   }
   render() {
     return (
-      <div className='app'>
-        <Navbar title='Github Finder' icon='fab fa-github' />
-        <div className='container'>
-          <Alert alert={this.state.alert} />
-          <Search searchUsers={this.searchUsers} clearInput={this.clearInput}
-            searchedUsers={this.state.searchedUsers} setAlert={this.setAlert} />
-          <Users loading={this.state.loading} users={this.state.users} />
-        </div>
+      <Router>
+        <div className='app'>
+          <Navbar title='Github Finder' icon='fab fa-github' />
+          <div className='container'>
+            <Alert alert={this.state.alert} />
+            <Switch>
+              {/* To render multiple Components we use render prop inside Route */}
+              <Route exact path='/' render={props => (
+                <Fragment>
+                  <Search searchUsers={this.searchUsers} clearInput={this.clearInput}
+                    searchedUsers={this.state.searchedUsers} setAlert={this.setAlert} />
+                  <Users loading={this.state.loading} users={this.state.users} />
+                </Fragment>
+              )} />
+              <Route exact path='/about' component={About} />
+            </Switch>
 
-      </div>
+          </div>
+
+        </div>
+      </Router>
     );
   }
 
