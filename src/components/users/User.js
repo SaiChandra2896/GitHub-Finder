@@ -7,10 +7,12 @@ import Spinner from '../layout/Spinner';
 import Repos from '../repos/Repos';
 
 const User = ({ user, loading, repos, getUser, getUserRepos, match }) => {
+    //console.log(typeof repos);
     useEffect(() => {
         getUser(match.params.login);
         getUserRepos(match.params.login);
-    }, [getUser, getUserRepos, match.params.login])
+        // eslint-disable-next-line
+    }, [])
     const { name,
         avatar_url,
         location,
