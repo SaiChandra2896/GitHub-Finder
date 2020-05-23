@@ -22,17 +22,6 @@ const App = () => {
   const [searchedUsers, setSearchedUsers] = useState(false);
   const [alert, setAlert] = useState(null);
 
-  //get users from API
-  const searchUsers = async (text) => {
-    setLoading(true)
-    const res = await axios.get(`https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${
-      process.env.REACT_APP_GITHUB_CLIENT_SECRET
-      }`);
-
-    setUsers(res.data.items);
-    setLoading(false);
-    setSearchedUsers(true);
-  }
 
   //get Users repos
   const getUserRepos = async (username) => {
@@ -80,9 +69,9 @@ const App = () => {
               {/* To render multiple Components we use render prop inside Route */}
               <Route exact path='/' render={props => (
                 <Fragment>
-                  <Search searchUsers={searchUsers} clearInput={clearInput}
+                  <Search clearInput={clearInput}
                     searchedUsers={searchedUsers} setAlert={setAlertMsg} />
-                  <Users loading={loading} users={users} />
+                  <Users />
                 </Fragment>
               )} />
               <Route exact path='/about' component={About} />
