@@ -33,7 +33,14 @@ const GithubState = props => {
     //Get Repos
 
     //Clear Users
-
+    const clearInput = () => {
+        // setUsers([]);
+        // setLoading(false);
+        // setSearchedUsers(false);
+        dispatch({
+            type: CLEAR_USERS
+        });
+    }
     //Set Loading
     const setLoading = () => dispatch({
         type: SET_LOADING
@@ -44,8 +51,9 @@ const GithubState = props => {
         user: state.user,
         repos: state.repos,
         loading: state.loading,
-        searchedUsers: state.searchUsers,
-        searchUsers
+        searchedUsers: state.searchedUsers,
+        searchUsers,
+        clearInput
     }}>
         {props.children}
     </GithubContext.Provider>

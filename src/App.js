@@ -15,11 +15,9 @@ import GithubState from './context/github/GithubState';
 import './App.css';
 
 const App = () => {
-  const [users, setUsers] = useState([]);
   const [user, setUser] = useState({});
   const [repos, setRepos] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [searchedUsers, setSearchedUsers] = useState(false);
   const [alert, setAlert] = useState(null);
 
 
@@ -46,13 +44,6 @@ const App = () => {
     setLoading(false);
   }
 
-  //clear users from state
-  const clearInput = () => {
-    setUsers([]);
-    setLoading(false);
-    setSearchedUsers(false);
-  }
-
   const setAlertMsg = (msg, type) => {
     setAlert({ msg, type })
 
@@ -69,8 +60,7 @@ const App = () => {
               {/* To render multiple Components we use render prop inside Route */}
               <Route exact path='/' render={props => (
                 <Fragment>
-                  <Search clearInput={clearInput}
-                    searchedUsers={searchedUsers} setAlert={setAlertMsg} />
+                  <Search setAlert={setAlertMsg} />
                   <Users />
                 </Fragment>
               )} />
