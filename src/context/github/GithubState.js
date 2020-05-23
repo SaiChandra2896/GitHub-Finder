@@ -52,8 +52,6 @@ const GithubState = props => {
             type: GET_REPOS,
             payload: res.data
         })
-        // setRepos(res.data);
-        // setLoading(false);
     }
 
     //Clear Users
